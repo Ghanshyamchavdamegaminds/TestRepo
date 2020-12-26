@@ -1,0 +1,397 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap CRUD Data Table for Database with Modal Form</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Activate tooltip
+            $('[data-toggle="tooltip"]').tooltip();
+
+            // Select/Deselect checkboxes
+            var checkbox = $('table tbody input[type="checkbox"]');
+            $("#selectAll").click(function () {
+                if (this.checked) {
+                    checkbox.each(function () {
+                        this.checked = true;
+                    });
+                } else {
+                    checkbox.each(function () {
+                        this.checked = false;
+                    });
+                }
+            });
+            checkbox.click(function () {
+                if (!this.checked) {
+                    $("#selectAll").prop("checked", false);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="alert alert-success" id="alertmessage" role="alert" style="display:none">
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h2>Manage <b>User</b></h2>
+                    </div>
+
+                    <div class="col-sm-9">
+                        <input type="text" style="width:200px; display:initial" class="form-control" id="Txtsearch" placeholder="Search" onkeyup="search()" />
+                        From <input type="date" class="datepik" style="color:black;" id="FDate" value="2012-10-08" @*onchange="search()"*@ /> To <input type="date" class="datepik" id="EDate" style="color:black;" @*onchange="search()"*@ />
+                        <button class="btn btn-success" onclick="searchdate()">GO</button>
+                        <button class="btn btn-success" onclick="Cleardate()">Clear</button>
+                    </div>
+                </div>
+            </div>
+
+            <table class="table table-striped table-hover" id="example">
+                <thead>
+                    <tr>
+                        @*<th>
+                                <span class="custom-checkbox">
+                                    <input type="checkbox" id="selectAll">
+                                    <label for="selectAll"></label>
+                                </span>
+                            </th>*@
+                        <th>No</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Date </th>
+                        @*<th>Address</th>
+                            <th>Phone</th>*@
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <div class="clearfix">
+                <a href="#editEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
+                <ul class="pagination">
+                    <li class="page-item disabled"><a href="#">Previous</a></li>
+                    <li class="page-item"><a href="#" class="page-link">1</a></li>
+                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                    <li class="page-item"><a href="#" class="page-link">4</a></li>
+                    <li class="page-item"><a href="#" class="page-link">5</a></li>
+                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Loading Modal HTML -->
+    <div id="Loading" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form>
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit Employee</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div><i class="fa fa-spinner-third fa-spin text-primary">tet</i> </div>
+                        <i class="fa fa-spinner-third fa-spin text-primary"></i> Loading Orders
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Modal HTML -->
+    <div id="editEmployeeModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form>
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit Employee</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div><i class="fa fa-spinner-third fa-spin text-primary">tet</i> </div>
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input type="text" class="form-control" id="Fname" required>
+                            <input type="checkbox" id="UserId" value="true" hidden />
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input type="text" class="form-control" id="Lname" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" id="Email" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input type="button" class="btn btn-info" value="Save" onclick="UpdateUser()" name="save">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Modal HTML -->
+    <div id="deleteEmployeeModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form>
+                    <div class="modal-header">
+                        <h4 class="modal-title">Delete Employee</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete these Records?</p>
+                        <p class="text-warning"><small>This action cannot be undone.</small></p>
+                        <input type="checkbox" id="UserIdD" value="true" hidden />
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input type="button" class="btn btn-danger" onclick="deleteUser()" value="Delete">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            Cleardate();
+            window.pagenumber = 0;
+            gettabledat();
+        });
+        function hidenesteddata() {
+            $(".table tr.nested").hide();
+            $(".table td.showHide").on('click', function () {
+                if ($(this).html() == '+') {
+                    $(this).html('-');
+                    $(this).parent('tr').next('tr.nested').show();
+                }
+                else {
+                    $(this).html('+');
+                    $(this).parent('tr').next('tr.nested').hide();
+                }
+            });
+        }
+        function Cleardate() {
+            $('#FDate').val('');
+            $('#EDate').val('');
+            $('#Txtsearch').val('')
+            gettabledat();
+        }
+        function searchdate() {
+            // if ($('#FDate').val() == "" || $('#EDate').val() == "") {
+            //    alert("Please select date")
+            //} else {
+            window.pagenumber = 0;
+            gettabledat();
+            //}
+        }
+        function search() {
+            window.pagenumber = 0;
+            gettabledat();
+        }
+        function deleteUser() {
+            $.post("/home/Deletedata?userid=" + $("#UserIdD").val(), function (Result, status) {
+                $("#deleteEmployeeModal").modal("hide");
+                $("#alertmessage").html("Record deleted.");
+                $("#alertmessage").show();
+                gettabledat();
+                setTimeout(function () {
+                    $('#alertmessage').slideUp(1000);
+                }, 2000);
+            });
+        }
+        function getDeleteUser(userid) {
+            $("#UserIdD").val(userid);
+        }
+        function UpdateUser() {
+            if ($("#Fname").val() != "" && $("#Lname").val() != "" && $("#Email").val() != '') {
+
+                $.post("/home/UpdateUser?userid=" + $("#UserId").val() + "&Firstname=" + $("#Fname").val() + "&Lastname=" + $("#Lname").val() + "&Emai=" + $("#Email").val(), function (Result, status) {
+                    $("#Fname").val('');
+                    $("#Lname").val('');
+                    $("#Email").val('');
+                    $("#editEmployeeModal").modal("hide");
+                    debugger;
+                    if ($("#UserId").val() == '') {
+                        $("#alertmessage").html("Save record");
+                        $("#UserId").val('');
+                    } else {
+                        $("#alertmessage").html("Updated record");
+                        $("#UserId").val('');
+                    }
+
+                    $('#alertmessage').show();
+                    gettabledat();
+                    setTimeout(function () {
+                        $('#alertmessage').slideUp(1000);
+                    }, 2000);
+                });
+            }
+        }
+        function gettabledat() {
+            $.get("/home/getdata?&pagenumber=" + window.pagenumber + "&Searchdata=" + $('#Txtsearch').val() + "&FDate=" + $('#FDate').val() + "&EDate=" + $('#EDate').val(), function (Result, status) {
+                var htmldata = "";
+                var data = JSON.parse(Result);
+
+                for (var i = 0; i < data.User.length; i++) {
+                    htmldata += "<tr class='accordion'>"
+                        + "<td class='showHide'> + </td>"
+                        + "<td>" + data.User[i].RowNum + "</td>"
+                        + "<td>" + data.User[i].Fullname + "</td>"
+                        + "<td>" + data.User[i].EmailAddress + "</td>"
+                        + "<td>" + data.User[i].DateCreated + "</td>"
+                        + '<td> <a href="#editEmployeeModal" onclick="getuserdata(\'' + data.User[i].UserProfileID + '\')" class="edit"  data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>'
+                        + '<a href="#deleteEmployeeModal" onclick="getDeleteUser(\'' + data.User[i].UserProfileID + '\')" class="delete"  data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE872;</i></a>'
+                        + "</td>"
+                        + "</tr>"
+                        + "<tr class='nested'>"
+                        + "<td colspan='5'>"
+                        + "<table class='table'>"
+                        + "<thead> "
+                        + "<tr> <th>Firstname</th> <th>Lastname</th> <th>Email</th></tr >"
+                        + "</thead>"
+                        + "<tbody>"
+                        + getsudata()
+                        + "</tbody > "
+                        + " </table > "
+                        + "</td>"
+                        + "</tr>";
+
+                }
+                $("#example tbody").html(htmldata);
+                hidenesteddata();
+                window.totalreco = data.User[0].Totalcount;
+                pagination();
+            });
+        }
+
+        function getsudata() {
+
+            $.get('/home/getdata', function (data, status) {
+                var data2 = JSON.parse(data);
+                
+                window.htmldata = '';
+                for (var i = 0; i < data2.User.length; i++) {
+                    
+                    window.htmldata += '<tr> '
+                        + '<td> ' + data2.User[i].RowNum   + '</td>'
+                        + '<td> ' + data2.User[i].Fullname + '</td> '
+                        + '<td> ' + data2.User[i].EmailAddress  + '</td >'
+                        + '</tr > ';
+                }
+            });
+            return window.htmldata;
+        }
+
+        function getuserdata(userid) {
+            $.ajax({
+                type: "GET",
+                url: "/home/getuserdata",
+                data: { userid: userid },
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                success: function (response) {
+                    var data = JSON.parse(response);
+                    $("#Fname").val(data.User[0].Firstname);
+                    $("#Lname").val(data.User[0].Lastname);
+                    $("#Email").val(data.User[0].EmailAddress);
+                    $("#UserId").val(data.User[0].UserProfileID);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+            //$.get("/home/getuserdata?Userid=" + userid, function (Result, status) {
+            //    var data = JSON.parse(Result);
+            //    $("#Fname").val(data.User[0].Firstname);
+            //    $("#Lname").val(data.User[0].Lastname);
+            //    $("#Email").val(data.User[0].EmailAddress);
+            //    $("#UserId").val(data.User[0].UserProfileID);
+            //});
+        }
+        function prevpage() {
+            if (window.pagenumber != 0) {
+                window.pagenumber = Math.ceil(window.pagenumber - 1);
+                gettabledat();
+            }
+        }
+        function nextpage() {
+            var totalpage = Math.ceil(window.totalreco / 10);
+            if (window.pagenumber != totalpage - 1) {
+                window.pagenumber = Math.ceil(window.pagenumber + 1);
+                gettabledat();
+            }
+        }
+        function pagination() {
+
+            var totalpage = Math.ceil(window.totalreco / 10);
+            if (totalpage != null) {
+                var htmldata = '';
+
+                htmldata += '<li class="page-item acitve" id="prevpage" onclick="prevpage()"><a href="#"> ' + window.totalreco + ' Previous</a></li>'
+                for (i = 1; i < totalpage + 1; i++) {
+                    if (window.pagenumber == i - 1) {
+                        if (i != 1) {
+                            if (i != 2) {
+                                htmldata += '<li class="page-item " onclick="pagechange(\'' + Math.ceil(i - 2) + '\')"><a href="#" class="page-link">' + Math.ceil(i - 2) + '</a></li>'
+                            }
+                            htmldata += '<li class="page-item " onclick="pagechange(\'' + Math.ceil(i - 1) + '\')"><a href="#" class="page-link">' + Math.ceil(i - 1) + '</a></li>'
+                        } else {
+                            //var prev = document.getElementById('#prevpage');
+                            //htmldata += '<li class="page-item disabled" id="prevpage" onclick="prevpage()"><a href="#"> ' + window.totalreco + ' Previous</a></li>'
+                            //var element = document.getElementById('prevpage');
+                            //element.classList.add('disabled');
+                        }
+                        htmldata += '<li class="page-item active " onclick="pagechange(\'' + i + '\')" ><a href="#" class="page-link">' + i + '</a></li>'
+                        if (i < totalpage) {
+                            htmldata += '<li class="page-item " onclick="pagechange(\'' + Math.ceil(i + 1) + '\')"><a href="#" class="page-link">' + Math.ceil(i + 1) + '</a></li>'
+                            if (i < totalpage - 1) {
+
+                                htmldata += '<li class="page-item " onclick="pagechange(\'' + Math.ceil(i + 2) + '\')"><a href="#" class="page-link">' + Math.ceil(i + 2) + '</a></li>'
+                                //htmldata += '<li class="page-item active" id="nextpage" onclick="nextpage()"><a href="#" class="page-link">Next</a></li>'
+                            }
+                        } else {
+                            //htmldata += '<li class="page-item disabled" id="nextpage" onclick="nextpage()"><a href="#" class="page-link">Next</a></li>'
+                        }
+                    } //else {
+
+                    //    htmldata += '<li class="page-item " onclick="pagechange(\'' + i + '\')"><a href="#" class="page-link">' + i + '</a></li>'
+                    //}
+                }
+                htmldata += '<li class="page-item active" id="nextpage" onclick="nextpage()"><a href="#" class="page-link">Next</a></li>'
+                $(".pagination").html(htmldata);
+            }
+        }
+
+        function pagechange(pagenu) {
+
+            var a = $(this).attr("value");
+            console.log(window.pagenumber);
+            window.pagenumber = pagenu - 1;
+            gettabledat();
+        }
+
+    </script>
+</body>
+</html> 

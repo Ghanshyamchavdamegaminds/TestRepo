@@ -1,0 +1,279 @@
+﻿@model IEnumerable<SQL_CRUD_SP.Models.UserProfiles>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lastname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nationality)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.externalauthid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.aspnetuserid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Key)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsDelete)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateDeleted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactInformationType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PostalCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegionCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubRegion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsProfileUpdated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhotoUrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DefaultPaymentOption)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DefaultPaymentInformationID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacebookId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TwitterId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GoogleId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InstagramId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SignupChannel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StripeCustomerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StreetLine1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StreetLine2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CountryCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReferralLinkID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReferralLink)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReferralUserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreditAmountForInviter)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReferralAmountClaimed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.flgIsAdmin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AppleId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.flgIsSync)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Firstname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lastname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.State)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Country)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nationality)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BirthDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.externalauthid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.aspnetuserid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Key)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsDelete)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateCreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateDeleted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactInformationType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostalCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RegionCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubRegion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsProfileUpdated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhotoUrl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DefaultPaymentOption)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DefaultPaymentInformationID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FacebookId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TwitterId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GoogleId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InstagramId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SignupChannel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StripeCustomerId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StreetLine1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StreetLine2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CountryCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReferralLinkID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReferralLink)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReferralUserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreditAmountForInviter)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReferralAmountClaimed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.flgIsAdmin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AppleId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.flgIsSync)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.UserProfileID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.UserProfileID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.UserProfileID })
+        </td>
+    </tr>
+}
+
+</table>
